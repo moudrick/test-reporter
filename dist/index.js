@@ -863,7 +863,7 @@ class DotnetTrxParser {
         };
     }
     exceptionThrowSource(stackTrace) {
-        const lines = stackTrace.split(/\r*\n/);
+        const lines = stackTrace ? stackTrace.split(/\r*\n/) : [];
         const re = / in (.+):line (\d+)$/;
         const { trackedFiles } = this.options;
         for (const str of lines) {
@@ -1060,7 +1060,7 @@ class JavaJunitParser {
         };
     }
     exceptionThrowSource(stackTrace) {
-        const lines = stackTrace.split(/\r?\n/);
+        const lines = stackTrace ? stackTrace.split(/\r?\n/) : [];
         for (const str of lines) {
             const stackTraceElement = (0, java_stack_trace_element_parser_1.parseStackTraceElement)(str);
             if (stackTraceElement) {
@@ -2143,7 +2143,7 @@ exports.getExceptionSource = exports.DEFAULT_LOCALE = void 0;
 const path_utils_1 = __nccwpck_require__(4070);
 exports.DEFAULT_LOCALE = 'en-US';
 function getExceptionSource(stackTrace, trackedFiles, getRelativePath) {
-    const lines = stackTrace.split(/\r?\n/);
+    const lines = stackTrace ? stackTrace.split(/\r?\n/) : [];
     const re = /\((.*):(\d+):\d+\)$/;
     for (const str of lines) {
         const match = str.match(re);
@@ -2195,7 +2195,7 @@ function parseIsoDate(str) {
 }
 exports.parseIsoDate = parseIsoDate;
 function getFirstNonEmptyLine(stackTrace) {
-    const lines = stackTrace.split(/\r?\n/g);
+    const lines = stackTrace ? stackTrace.split(/\r?\n/g) : [];
     return lines.find(str => !/^\s*$/.test(str));
 }
 exports.getFirstNonEmptyLine = getFirstNonEmptyLine;

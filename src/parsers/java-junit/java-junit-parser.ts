@@ -146,7 +146,7 @@ export class JavaJunitParser implements TestParser {
   }
 
   private exceptionThrowSource(stackTrace: string): {filePath: string; line: number} | undefined {
-    const lines = stackTrace.split(/\r?\n/)
+    const lines = stackTrace ? stackTrace.split(/\r?\n/) : []
 
     for (const str of lines) {
       const stackTraceElement = parseStackTraceElement(str)
