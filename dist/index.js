@@ -2112,7 +2112,7 @@ function tableEscape(content) {
 exports.tableEscape = tableEscape;
 function fixEol(text) {
     var _a;
-    return (_a = text === null || text === void 0 ? void 0 : text.replace(/\r/g, '')) !== null && _a !== void 0 ? _a : '';
+    return (_a = text === null || text === void 0 ? void 0 : text ? text.toString().replace(/\r/g, '') : '') !== null && _a !== void 0 ? _a : '';
 }
 exports.fixEol = fixEol;
 function ellipsis(text, maxLength) {
@@ -28031,7 +28031,7 @@ function runParallel (tasks, cb) {
 
   function textopts (opt, text) {
     if (opt.trim) text = text.trim()
-    if (opt.normalize) text = text.replace(/\s+/g, ' ')
+    if (opt.normalize) text = text ? text.toString().replace(/\s+/g, ' ') : ''
     return text
   }
 
@@ -32917,7 +32917,7 @@ function wrappy (fn, cb) {
           s = stack[stack.length - 1];
           if (s) {
             s[charkey] += text;
-            if (_this.options.explicitChildren && _this.options.preserveChildrenOrder && _this.options.charsAsChildren && (_this.options.includeWhiteChars || text.replace(/\\n/g, '').trim() !== '')) {
+            if (_this.options.explicitChildren && _this.options.preserveChildrenOrder && _this.options.charsAsChildren && (_this.options.includeWhiteChars || text ? text.toString().replace(/\\n/g, '').trim() : '' !== '')) {
               s[_this.options.childkey] = s[_this.options.childkey] || [];
               charChild = {
                 '#name': '__text__'
